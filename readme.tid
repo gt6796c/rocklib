@@ -4,3 +4,29 @@ title: $:/plugins/gt6796c/rocklib/readme
 This plugin packages [[rocklib|https://github.com/gt6796c/rocklib]] for use by other plugins. It does not provide any end-user visible features.
 
 No user-visible elements.
+
+provides the following functions:
+
+;getScriptBody(src, att)
+: attempts to pull the text out of ``src`` element's body or the specified attribute ``att``
+
+;getOptions(src,tag,options)
+: in the case of a widget, adds all of ``src`` element's attributes into the ``options`` object
+: in the case of a Tiddler, adds all of the fields that begin with ``tag`` into the ``options`` object (minus the ``tag-`` prefix)
+: All options are first treated as Data Tiddler Names, then JSON, and finally as plain text
+
+;getCanvas(src,tag,type)
+: creates a uniquely-named "canvas" which may be of type ``type``. Supported types are ``div`` and ``canvas``
+: The height and width attributes from the ``src`` element will be applied to the canvas
+
+;nextColor(s,v)
+: returns a random-ish color string from the same palette as specified byt the ``s`` saturation and ``h`` hue.
+: The color is in the form of ``#rrggbb``
+
+;rgb_to_hsv(r,g,b)
+: returns array of [hue, saturation, value]
+: r can be array of [r,g,b] or individual parameters can be used
+
+;hsv_to_rgb(h,s,v)
+: returns array of [red, green, blue]
+: h can be array of [h,s,v] or individual parameters can be used

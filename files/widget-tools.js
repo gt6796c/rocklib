@@ -79,10 +79,19 @@
                 var t = src.wiki.getTiddler(tt);
                 if (t)
                 {
+                    // this looks for fields that start with our tag
+                    // and then maps a.x to aX since something is
+                    // unCamelCasing the vars
                     for (var f in t.fields) {
                         var fi = f.indexOf(tag);
                         if (fi != 0) continue;
-                        var k = f.substring(tag.length+1);
+                        var k = f.substring(tag.length + 1);
+                        var cap = k.indexOf(".");
+                        while (cap > -1) {
+                            if (k.length < cap+2) break;
+                            k = k.substring(0, cap) + k.charAt(cap + 1).toUpperCase() + k.substring(cap + 2);
+                            cap = k.indexOf(".");
+                        }
                         var v = t.fields[f];
                         // try as JSON
                         try {
@@ -120,8 +129,6 @@
 
     };
 
-    Rocklib.prototype.getCanvas = function(src, tag) { return getCanvas(src,tag,"div");}
-
     /**
      * Retrieves a canvas to work with based on the calling functions need of a "div" or "canvas" element
      * @param src
@@ -131,6 +138,8 @@
      */
     Rocklib.prototype.getCanvas = function(src, tag, type)
     {
+        type = typeof(type) === "undefined" ? "div" : type;
+
         var height = src.getAttribute("height");
         var width = src.getAttribute("width");
 
