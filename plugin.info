@@ -3,5 +3,6 @@
 	"description": "Utility classes for gt6796c plugins",
 	"author": "Nathan Jones",
 	"core-version": ">=5.0.0",
+	"version": "0.1.3",
 	"list": "readme license"
 }
